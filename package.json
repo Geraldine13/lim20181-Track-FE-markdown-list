@@ -1,0 +1,22 @@
+{
+  "name": "markdown",
+  "version": "1.0.0",
+  "description": "Librería para validar los links de archivos Markdown.",
+  "main": "cli.js",
+  "bin": {
+    "md-links": "cli.js"
+  },
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Geraldine13/lim20181-Track-FE-markdown-list.git"
+  },
+  "author": "Geraldine Saco <geraldine.cristal@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Geraldine13/lim20181-Track-FE-markdown-list/issues"
+  },
+  "homepage": "https://github.com/Geraldine13/lim20181-Track-FE-markdown-list#readme"
+}
