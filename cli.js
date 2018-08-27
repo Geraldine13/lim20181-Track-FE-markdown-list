@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const validations = require('./validations.js');
-const index = require('./index.js')
+const optionsLinks = require('./optionsLinks.js')
 
 // Argumentos ingresados por la línea de comando - options.
 const [,, ...args] = process.argv;
@@ -23,17 +23,28 @@ switch (directory !== '') {
     case (fs.existsSync(directory)):
         const pathAbsolute = validations.isPathAbsolute(directory);
         const pathFileMd = validations.readPath(pathAbsolute);
-        validations.readLinks(pathFileMd)
+        optionsLinks.readLinks(pathFileMd)
         .then((data) => {
-            console.log('...EN RESOLVEeeeeeeeeeeeeeeeeeeeeeee');
-            console.log(data);
-            
+            console.log(data);   
         })
         .catch((error) => {
             console.log(error);
         })
         break;
 }
+
+
+
+// switch (args[0] !== '') {
+//     case (args[0] === '--validate'):
+//         options.validate = true;
+        
+
+// }
+
+// if (options.validate === true) {
+//     optionsLinks.validate()
+// }
 
 // if (directory === '--help') { // ok
 //     index.instructions();     // ok

@@ -21,9 +21,6 @@ const isPathAbsolute = (routerArg) => {
 
 
 // Exp Regulares para el filtrado de los links en los archivos Markdown.
-const expRegLinks = /\[((.+?))\]\((http|https|ftp|ftps).+?\)/g;
-const extractURL = /\((http|https|ftp|ftps).+?\)/g;
-const extractNameURL = /\[.+?\]/g;
 const expRegMarkdown = /.\.(m|M(?:d|D?markdown)?)|text$/g;
 
 
@@ -49,42 +46,10 @@ const readPath = (routerArg) => {
 }
 
 
-// Función que valida si es un archivo y filtra si es .md y lo lee
-const readLinks = (routerFile) => {
-    return new Promise((resolve, reject) => {
-        const contentTotal = fs.readFileSync(routerFile).toString();
-        const listLinks = contentTotal.match(expRegLinks);
-        const dataLinks = [];
-        let result = '';
-        listLinks.forEach(link => {
-            dataLinks.push({
-                file: routerFile,
-                href: link.match(extractURL).toString(), 
-                text: link.match(extractNameURL).toString()
-                
-            })
-            result = `${dataLinks.file} ${dataLinks.href} ${dataLinks.text}`
-        })
-
-        
-            
-           
-        
-        
-        setTimeout(() => {
-            resolve(
-                result
-            )
-        }, 1000)
-    })
-}
-
-
-
 exports.convertToAbsolute = convertToAbsolute;
 exports.isPathAbsolute = isPathAbsolute;
 exports.readPath = readPath;
-exports.readLinks = readLinks;
+
 
 
 

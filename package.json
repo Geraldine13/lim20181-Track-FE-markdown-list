@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/Geraldine13/lim20181-Track-FE-markdown-list/issues"
   },
-  "homepage": "https://github.com/Geraldine13/lim20181-Track-FE-markdown-list#readme"
+  "homepage": "https://github.com/Geraldine13/lim20181-Track-FE-markdown-list#readme",
+  "dependencies": {
+    "node-fetch": "^2.2.0"
+  }
 }
