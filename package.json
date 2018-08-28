@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/Geraldine13/lim20181-Track-FE-markdown-list#readme",
   "dependencies": {
-    "node-fetch": "^2.2.0"
+    "node-fetch": "^2.2.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
   }
 }

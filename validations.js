@@ -32,11 +32,11 @@ const readPath = (routerArg) => {
        listFile.forEach(file => {
             const newPath = path.join(routerArg, file);
             const newRoute = fs.statSync(newPath);
-            if (newRoute.isDirectory()) {
-                readPath(newPath); 
-            } else if (newRoute.isFile() && expRegMarkdown.test(file)) {
-                arrayFile.push(newPath);  
-            }
+            if (newRoute.isDirectory()) { // eliminar y poner directamente la recursividad
+                readPath(newPath); //
+            } else if (newRoute.isFile() && expRegMarkdown.test(file)) { //
+                arrayFile.push(newPath);  // -------
+            } //---------------
        });  
     } else if (fs.statSync(routerArg).isFile() && expRegMarkdown.test(path.basename(routerArg))) {
          arrayFile.push(routerArg);

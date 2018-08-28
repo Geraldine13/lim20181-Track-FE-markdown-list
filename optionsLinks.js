@@ -1,5 +1,6 @@
 const fs = require('fs');
 const fetch = require('node-fetch');
+const rp = require ('request-promise');
 
 
 // Exp Regulares para el filtrado de los links en los archivos Markdown.
@@ -9,27 +10,10 @@ const expRegNameURL = /\[.+?\]/g;
 
 const dataLinks = [];
 
-const validate = (url) => {
-    fetch(url)
-        .then((response) => {
-            
-            if (response.ok) {
-                dataLinks.push({status: ok});
-            } else {
-                dataLinks.push({status: fail})
-            }
-        })
-        .catch((e) => {
-            console.log('Problema con la petición:' + e.message);
-        })
-    return dataLinks;
-}
-
-
-
 // Función que valida si es un archivo y filtra si es .md y lo lee
 const readLinks = (routerFile) => {
     return new Promise((resolve, reject) => {
+        
         const contentTotal = fs.readFileSync(routerFile).toString();
         const listLinks = contentTotal.match(expRegLinks);
         listLinks.forEach(link => {
@@ -40,20 +24,44 @@ const readLinks = (routerFile) => {
                 href: newHref.substring(1, newHref.length-1), 
                 text: newText.substring(1, newText.length-1)
             })
-            validate('dataLinks.href')
         })
-        
-        setTimeout(() => {
-            resolve(
-                dataLinks
-            )
-        }, 1000)
+        resolve(
+            dataLinks
+        )
+        reject('Error');
     })
 }
 
 
 
 
+const validateLinks = (data) => {
+        const arrayPromises = data.map(url => {
+            let urlRef = fetch(url.href);
+            return urlRef.then((res) => {
+                return ({
+                    file: url.file,
+                    href: url.href,
+                    text: url.text,
+                    status: `${res.status} --> ${res.statusText}`
+                })
+            })
+            .catch(error => {
+                return ({
+                    file: url.file,
+                    href: url.href,
+                    text: url.text,
+                    status: 'Error en conexión con el servidor'
+                }) 
+            })
+        })
+        
+        Promise.all(arrayPromises)
+            .then(responses => {
+                console.log(responses);
+                
+            })
+}
 
 exports.readLinks = readLinks;
-//exports.validate = validate;
+exports.validateLinks = validateLinks;

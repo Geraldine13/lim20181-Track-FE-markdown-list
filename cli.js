@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const fs = require('fs');
+const index = require('./index.js')
 const validations = require('./validations.js');
 const optionsLinks = require('./optionsLinks.js')
 
@@ -15,22 +16,47 @@ const options = {
     stats: false,
 }
 
+if (args.includes('--validate')){
+    options.validate = true
+}
 
-switch (directory !== '') {
-    case (directory === '--help'):
-        index.instructions();
-        break;
-    case (fs.existsSync(directory)):
-        const pathAbsolute = validations.isPathAbsolute(directory);
-        const pathFileMd = validations.readPath(pathAbsolute);
-        optionsLinks.readLinks(pathFileMd)
+
+//--------------directory or path ingresado----------------//
+
+if (fs.existsSync(directory) && args[0] === undefined) {
+    const pathAbsolute = validations.isPathAbsolute(directory);
+    const pathFileMd = validations.readPath(pathAbsolute);
+    optionsLinks.readLinks(pathFileMd)
         .then((data) => {
-            console.log(data);   
+            console.log(data);  
         })
         .catch((error) => {
             console.log(error);
         })
-        break;
+}
+
+if (directory === '--help' && args[0] === undefined) {
+    index.instructions();
+}
+  
+
+//-------------directory y --validate------------//
+
+if (fs.existsSync(directory) && args[0] === '--validate') {
+    console.log('ingreso prueba validate');
+    const pathAbsolute = validations.isPathAbsolute(directory);
+    const pathFileMd = validations.readPath(pathAbsolute);
+    optionsLinks.readLinks(pathFileMd)
+        .then((data) => {
+            optionsLinks.validateLinks(data)
+                dataValid => {
+                    console.log(dataValid);
+                }
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    
 }
 
 
