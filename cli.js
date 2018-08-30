@@ -40,24 +40,51 @@ if (directory === '--help' && args[0] === undefined) {
 }
   
 
-//-------------directory y --validate------------//
+//-------------directory && --validate------------//
 
 if (fs.existsSync(directory) && args[0] === '--validate') {
-    console.log('ingreso prueba validate');
     const pathAbsolute = validations.isPathAbsolute(directory);
     const pathFileMd = validations.readPath(pathAbsolute);
     optionsLinks.readLinks(pathFileMd)
         .then((data) => {
-            optionsLinks.validateLinks(data)
-                dataValid => {
-                    console.log(dataValid);
-                }
+            optionsLinks.validateLinks(data);
         })
         .catch((error) => {
             console.log(error);
         })
     
 }
+
+
+//------------directory && --stats--------------//
+if (fs.existsSync(directory) && args[0] === '--stats' ) {
+    const pathAbsolute = validations.isPathAbsolute(directory);
+    const pathFileMd = validations.readPath(pathAbsolute);
+    optionsLinks.statsLinks(pathFileMd)
+        .then(result => {
+            console.log(result);
+        }) 
+}
+
+
+//--------directory && --validate && --stats----//
+if (fs.existsSync(directory) && args[0] === '--stats' && args[1] === '--validate') {
+    console.log('validate y stats');
+    const pathAbsolute = validations.isPathAbsolute(directory);
+    const pathFileMd = validations.readPath(pathAbsolute);
+    optionsLinks.readLinks(pathFileMd)
+        .then((data) => {
+            optionsLinks.validateAndStats(data)
+
+        })
+        .catch((error) => {
+            console.log(error);
+        })   
+}
+
+
+
+
 
 
 
