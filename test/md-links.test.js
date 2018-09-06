@@ -1,5 +1,8 @@
-const sum = require('../sum');
+const mdLinks = require('./src/index.js');
 
-test('adds 1 + 2 to equal 3', () => {
-  expect(sum(1, 2)).toBe(3);
-});
+test('debería retornar un arreglo de objeto con [{total, unique}] para option --stats', () => {
+    expect.assertions(1);
+    return fetchData().then(data => {
+      expect(data).toBe('peanut butter');
+    });
+  });

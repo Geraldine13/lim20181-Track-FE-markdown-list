@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+
 const expRegMarkdown = /.\.(m|M(?:d|D?markdown)?)|text$/g;
 
 
@@ -7,24 +8,24 @@ const expRegMarkdown = /.\.(m|M(?:d|D?markdown)?)|text$/g;
 const isPathAbsolute = (routerArg) => {
   if (path.isAbsolute(routerArg)) {
     return routerArg;
-  } else {
-    return path.resolve(routerArg);
   }
-}
+  return path.resolve(routerArg);
+};
 
 
-// Función que lee la ruta y valida si es Archivo/Carpeta y recorre sus archivos y filtra archivos .md
+// Función que lee la ruta y valida si es Archivo/Carpeta
+// y recorre sus archivos y filtra archivos .md
 const readPath = (routerArg) => {
   const arrayFile = [];
   if (fs.statSync(routerArg).isDirectory()) {
     const listFile = fs.readdirSync(routerArg);
-    listFile.forEach(file => {
+    listFile.forEach((file) => {
       const newPath = path.join(routerArg, file);
       const newRoute = fs.statSync(newPath);
-      if (newRoute.isFile() && expRegMarkdown.test(file)) { // eliminar y poner directamente la recursividad
+      if (newRoute.isFile() && expRegMarkdown.test(file)) { // eliminar y poner la recursividad
         arrayFile.push(newPath);
       } else { //
-        readPath(newPath);  // -------
+        readPath(newPath); // -------
       } //---------------
     });
   } else if (fs.statSync(routerArg).isFile() && expRegMarkdown.test(path.basename(routerArg))) {
@@ -32,7 +33,7 @@ const readPath = (routerArg) => {
   }
   const pathFileMd = arrayFile.toString();
   return pathFileMd;
-}
+};
 
 
 exports.isPathAbsolute = isPathAbsolute;
