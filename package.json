@@ -8,7 +8,7 @@
   },
   "scripts": {
     "eslint": "eslint ./src",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",

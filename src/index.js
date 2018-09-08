@@ -1,11 +1,7 @@
 const optionsLinks = require('./optionsLinks.js');
 
 const mdLinks = (path, options) => {
-  const resultFinal = [{
-    total: '',
-    unique: '',
-    broken: ''
-  }];
+  const resultFinal = {};
   const objTotalLinks = [];
   return new Promise((resolve, reject) => {
     if (options.validate && options.stats) {
@@ -22,6 +18,7 @@ const mdLinks = (path, options) => {
             resolve(resultFinal);
           });
         });
+        
     } else if (options.validate) {
       optionsLinks.readLinks(path)
         .then((result) => {

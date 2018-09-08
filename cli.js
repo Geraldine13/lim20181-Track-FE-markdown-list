@@ -42,7 +42,7 @@ if (pathValid && args.includes('--stats') && args.includes('--validate')) {
   options.stats = true;
   options.validate = true;
   index.mdLinks(pathValid, options)
-    .then(result => {      
+    .then(result => {    
       console.log(`Total: ${result.total} \nUnique: ${result.unique} \nBroken: ${result.broken} `);
     });
 } else if (pathValid && args[0] === undefined) {
@@ -63,7 +63,7 @@ if (pathValid && args.includes('--stats') && args.includes('--validate')) {
 } else if (pathValid && args[0] === '--stats') {
   options.stats = true;
   index.mdLinks(pathValid, options)
-    .then(result => {      
+    .then(result => {
       console.log(`Total: ${result.total} \nUnique: ${result.unique}`);
     });
 }

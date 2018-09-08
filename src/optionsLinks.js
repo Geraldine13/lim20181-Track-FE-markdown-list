@@ -9,7 +9,8 @@ const expRegNameURL = /\[.+?\]/g;
 
 
 // Función que valida si es un archivo y filtra si es .md y lo lee
-const readLinks = routerFile => new Promise((resolve, reject) => {
+const readLinks = routerFile => {
+  return new Promise((resolve, reject) => {
   const dataLinks = [];
   const contentTotal = fs.readFileSync(routerFile).toString();
   const listLinks = contentTotal.match(expRegLinks);
@@ -25,6 +26,7 @@ const readLinks = routerFile => new Promise((resolve, reject) => {
   resolve(dataLinks);
   reject(new Error('Error'));
 });
+}
 
 
 // Función --validate
