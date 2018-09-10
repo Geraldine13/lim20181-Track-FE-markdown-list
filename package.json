@@ -1,5 +1,5 @@
 {
-  "name": "markdown",
+  "name": "mdlinkslaboratoria",
   "version": "1.0.0",
   "description": "Librería para validar los links de archivos Markdown.",
   "main": "cli.js",
@@ -8,7 +8,8 @@
   },
   "scripts": {
     "eslint": "eslint ./src",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "prestart": "npm install"
   },
   "repository": {
     "type": "git",

@@ -43,8 +43,7 @@ const validateLinks = (data) => {
         file: url.file,
         href: url.href,
         text: url.text,
-        status: 'Fail',
-        message: error.message
+        status: 'Fail'
       }));
   });
   return Promise.all(arrayPromises);

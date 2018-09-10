@@ -10,9 +10,9 @@ test('debería retornar un objeto con {total, unique} para option --stats', () =
     .then(response => {
       expect(response).toEqual({total: 5, unique: 4});
     });
-});
+}, 5000);
 
-test('debería retornar un objeto con {total, unique, broquen} para options --validate y --stats', () => {
+test('debería retornar un objeto con [{total, unique, broquen}] para options --validate y --stats', () => {
   const options = {
     validate: true,
     stats: true
@@ -23,7 +23,7 @@ test('debería retornar un objeto con {total, unique, broquen} para options --va
     });
 });
 
-test('debería retornar un array de objetos con [{ href, text, file, status, ok }] para option --validate', () => {
+test('debería retornar un array de objetos con [{href, text, file, status}] para option --validate', () => {
   const options = {
     validate: true,
     stats: false
@@ -53,4 +53,4 @@ test('debería retornar un array de objetos con [{ href, text, file, status, ok 
             status: '200 --> OK' } ]
       );
     });
-});
+}, 10000);

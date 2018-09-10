@@ -30,29 +30,30 @@ const pathCheck = (route) => {
     return pathFileMd;
   } else if (route === '--help') {
     instructions();
-  } else {
+  } else if (route !== '--help' || route !== 'md-links') {
     console.log('Ruta ingresada no existe. \nIngrese comando --help');
   }
 };
 
-let pathValid = pathCheck(directory);
 
-
-if (pathValid && args.includes('--stats') && args.includes('--validate')) {
+if (directory && args.includes('--stats') && args.includes('--validate')) {
+  let pathValid = pathCheck(directory);
   options.stats = true;
   options.validate = true;
   index.mdLinks(pathValid, options)
     .then(result => {    
       console.log(`Total: ${result.total} \nUnique: ${result.unique} \nBroken: ${result.broken} `);
     });
-} else if (pathValid && args[0] === undefined) {
+} else if (directory && args[0] === undefined) {
+  let pathValid = pathCheck(directory);
   optionsLinks.readLinks(pathValid)
     .then(result => {
       result.forEach(element => {
         console.log(`${element.file}  ${element.href}  ${element.text}`);
       });
     });
-} else if (pathValid && args[0] === '--validate') {
+} else if (directory && args[0] === '--validate') {
+  let pathValid = pathCheck(directory);
   options.validate = true;
   index.mdLinks(pathValid, options)
     .then(result => {
@@ -60,10 +61,11 @@ if (pathValid && args.includes('--stats') && args.includes('--validate')) {
         console.log(`${element.file}  ${element.href}  ${element.text}  ${element.status}`);
       });
     });
-} else if (pathValid && args[0] === '--stats') {
+} else if (directory && args[0] === '--stats') {
+  let pathValid = pathCheck(directory);
   options.stats = true;
   index.mdLinks(pathValid, options)
-    .then(result => {
+    .then(result => {      
       console.log(`Total: ${result.total} \nUnique: ${result.unique}`);
     });
 }
