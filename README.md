@@ -40,7 +40,7 @@ Para usarlo programáticamente en ambos casos, se debe importar con `require`, v
 
 ## Versión
 
-1.0.1
+1.0.2
 
 ## Ejemplos del uso
 
