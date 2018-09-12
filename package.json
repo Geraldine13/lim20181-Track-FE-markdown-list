@@ -1,8 +1,8 @@
 {
   "name": "mdlinkslaboratoria",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Librería para validar los links de archivos Markdown.",
-  "main": "cli.js",
+  "main": "index.js",
   "bin": {
     "md-links": "cli.js"
   },
