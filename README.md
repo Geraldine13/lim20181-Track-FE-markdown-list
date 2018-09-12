@@ -85,10 +85,3 @@ Para usarlo programáticamente en ambos casos, se debe importar con `require`, v
 - Para la implementación de la librería se realizó el backlog en el proyecto del repositorio. [Ver Backlog](https://github.com/Geraldine13/lim20181-Track-FE-markdown-list/projects/1)
 
 ![backlog](https://s15.postimg.cc/hsgi5pc3v/backlog.png)
-
-### Pruebas / tests
-
-- Las pruebas unitarias cubren un mínimo del 70% de statements, functions,
-      lines, y branches.
-
-![test](https://s15.postimg.cc/nfcv379hn/test.png)

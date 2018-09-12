@@ -1,56 +1,77 @@
-const index = require('../src/index.js');
-const path = 'test/prueba/Readme.md';
+const mdLinks = require('../src/index.js');
 
-test('debería retornar un objeto con {total, unique} para option --stats', () => {
-  const options = {
-    validate: false,
-    stats: true
-  }
-  return index.mdLinks(path, options)
-    .then(response => {
-      expect(response).toEqual({total: 5, unique: 4});
-    });
-}, 5000);
-
-test('debería retornar un objeto con [{total, unique, broquen}] para options --validate y --stats', () => {
-  const options = {
-    validate: true,
-    stats: true
-  }
-  return index.mdLinks(path, options)
-    .then(response => {
-      expect(response).toEqual({total: 5, unique: 4, broken: 1});
-    });
-});
-
-test('debería retornar un array de objetos con [{href, text, file, status}] para option --validate', () => {
-  const options = {
-    validate: true,
-    stats: false
-  }
-  return index.mdLinks(path, options)
-    .then(response => {
+test('debería retornar un array de objetos con [{file, href, text, status}] para option --validate', () => {
+  return mdLinks('test/prueba', {validate: true, stats: false})
+    .then(response => {      
       expect(response).toEqual(
-        [ { file: 'test/prueba/Readme.md',
+        [ { file: 'C:\\Users\\GeraldineSaco\\Documents\\lim20181-Track-FE-markdown-list\\test\\prueba\\Readme.md',
             href: 'https://www.laboratoria.la/',
             text: 'Laboratoria',
             status: '200 --> OK' },
-          { file: 'test/prueba/Readme.md',
+          { file: 'C:\\Users\\GeraldineSaco\\Documents\\lim20181-Track-FE-markdown-list\\test\\prueba\\Readme.md',
             href: 'https://www.crowdbotics.com/',
             text: 'Crowdbotics',
             status: '200 --> OK' },
-          { file: 'test/prueba/Readme.md',
+          { file: 'C:\\Users\\GeraldineSaco\\Documents\\lim20181-Track-FE-markdown-list\\test\\prueba\\Readme.md',
             href: 'https://en.wikipedia.org/wiki/Caesar_cipher',
             text: 'cifrado César',
             status: '200 --> OK' },
-          { file: 'test/prueba/Readme.md',
+          { file: 'C:\\Users\\GeraldineSaco\\Documents\\lim20181-Track-FE-markdown-list\\test\\prueba\\Readme.md',
             href: 'https://github.con/Galdine13',
             text: 'GitHub',
-            status: 'Fail'},
-          { file: 'test/prueba/Readme.md',
+            status: 'Fail' },
+          { file: 'C:\\Users\\GeraldineSaco\\Documents\\lim20181-Track-FE-markdown-list\\test\\prueba\\Readme.md',
             href: 'https://www.laboratoria.la/',
             text: 'Laboratoria',
+            status: '200 --> OK' },
+          { file: 'C:\\Users\\GeraldineSaco\\Documents\\lim20181-Track-FE-markdown-list\\test\\prueba\\Readme.md',
+            href: 'https://www.google.com',
+            text: 'Google',
             status: '200 --> OK' } ]
       );
     });
-}, 10000);
+});
+
+test('debería retornar un array de objetos con [{file, href, text}] cuando se pase sólo la ruta como argumento', () => {
+  return mdLinks('test/prueba', {validate: false, stats: false})
+    .then(response => {
+      expect(response).toEqual(
+        [ { file: 'C:\\Users\\GeraldineSaco\\Documents\\lim20181-Track-FE-markdown-list\\test\\prueba\\Readme.md',
+            href: 'https://www.laboratoria.la/',
+            text: 'Laboratoria' },
+          { file: 'C:\\Users\\GeraldineSaco\\Documents\\lim20181-Track-FE-markdown-list\\test\\prueba\\Readme.md',
+            href: 'https://www.crowdbotics.com/',
+            text: 'Crowdbotics' },
+          { file: 'C:\\Users\\GeraldineSaco\\Documents\\lim20181-Track-FE-markdown-list\\test\\prueba\\Readme.md',
+            href: 'https://en.wikipedia.org/wiki/Caesar_cipher',
+            text: 'cifrado César' },
+          { file: 'C:\\Users\\GeraldineSaco\\Documents\\lim20181-Track-FE-markdown-list\\test\\prueba\\Readme.md',
+            href: 'https://github.con/Galdine13',
+            text: 'GitHub' },
+          { file: 'C:\\Users\\GeraldineSaco\\Documents\\lim20181-Track-FE-markdown-list\\test\\prueba\\Readme.md',
+            href: 'https://www.laboratoria.la/',
+            text: 'Laboratoria' },
+          { file: 'C:\\Users\\GeraldineSaco\\Documents\\lim20181-Track-FE-markdown-list\\test\\prueba\\Readme.md',
+            href: 'https://www.google.com',
+            text: 'Google' } ]
+        );
+    });
+}); 
+
+test('debería retornar un objeto con {total, unique} para option --stats', () => {
+  return mdLinks('test/prueba', {validate: false, stats: true})
+    .then(response => {
+      expect(response).toEqual({total: 6, unique: 5});
+    });
+});
+
+test('debería retornar un objeto con [{total, unique, broquen}] para options --validate y --stats', () => {
+  return mdLinks('test/prueba', {validate: true, stats: true})
+    .then(response => {
+      expect(response).toEqual({total: 6, unique: 5, broken: 1});
+    });
+});
+
+
+
+
